@@ -10,15 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123194905) do
+ActiveRecord::Schema.define(version: 20180130143249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "priorities", force: :cascade do |t|
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "task_statuses", force: :cascade do |t|
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.text "title"
+    t.bigint "project_id"
+    t.bigint "priority_id"
+    t.datetime "end_date"
+    t.text "description"
+    t.bigint "task_status_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["priority_id"], name: "index_tasks_on_priority_id"
+    t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.index ["task_status_id"], name: "index_tasks_on_task_status_id"
   end
 
   create_table "user_roles", id: false, force: :cascade do |t|
