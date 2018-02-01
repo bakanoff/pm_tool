@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123194905) do
+ActiveRecord::Schema.define(version: 20180130154259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id"
+    t.bigint "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_comments_on_task_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "priorities", force: :cascade do |t|
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "label"
@@ -21,11 +43,40 @@ ActiveRecord::Schema.define(version: 20180123194905) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "task_statuses", force: :cascade do |t|
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.text "title"
+    t.bigint "project_id"
+    t.bigint "priority_id"
+    t.datetime "end_date"
+    t.text "description"
+    t.bigint "task_status_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["priority_id"], name: "index_tasks_on_priority_id"
+    t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.index ["task_status_id"], name: "index_tasks_on_task_status_id"
+  end
+
   create_table "user_roles", id: false, force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "role_id"
     t.index ["role_id"], name: "index_user_roles_on_role_id"
     t.index ["user_id"], name: "index_user_roles_on_user_id"
+  end
+
+  create_table "user_tasks", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_user_tasks_on_task_id"
+    t.index ["user_id"], name: "index_user_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
