@@ -1,0 +1,4 @@
+%p
+  = link_to priority.label, priority
+  = link_to 'Edit', edit_priority_path(priority)
+  = link_to 'Delete', priority, method: :delete, data: { confirm: 'Are you sure?' }
