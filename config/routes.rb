@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :projects
   resources :tasks
   resources :priorities
+  resources :task_statuses
 end

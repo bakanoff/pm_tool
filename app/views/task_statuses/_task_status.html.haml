@@ -1,0 +1,4 @@
+%p
+  = link_to task_status.label, task_status
+  = link_to 'Edit', edit_task_status_path(task_status)
+  = link_to 'Delete', task_status, method: :delete, data: { confirm: 'Are you sure?' }
