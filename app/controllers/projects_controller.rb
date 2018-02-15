@@ -1,9 +1,8 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  
+
   def index
-    # @projects = Project.all
-    @tasks = Project.all.map(&:tasks)
+    @projects = Project.all
   end
 
   def new
@@ -39,7 +38,6 @@ class ProjectsController < ApplicationController
   end
 
   def set_project
-    binding.pry
     @project = Project.find(params[:id])
   end
 end

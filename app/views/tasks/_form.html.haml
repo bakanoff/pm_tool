@@ -1,8 +1,12 @@
-.form_group
-  = simple_form_for [@task.project, @task] do |f|
-    = f.input :title
-    = f.input :description
-    = f.input :end_date, discard_year:true, discard_minute: true
-    = f.association :priority
-    = f.association :task_status
-    = f.button :submit
+= simple_form_for [@task.project, @task], input_html: { class: 'form-horizontal' } do |f|
+  .form_group
+    = f.input :title, input_html: { class: 'form-control' }
+  .form_group
+    = f.input :description, input_html: { class: 'form-control' }
+  .form_group
+    = f.input :end_date, discard_year:true, discard_minute: true, input_html: { class: 'form-control' }
+  .form_group
+    = f.association :priority, collection: Priority.all.pluck(:label), selected: Priority.first
+  .form_group
+    = f.association :task_status, collection: TaskStatus.all.pluck(:label), selected: TaskStatus.first
+  = f.button :submit

@@ -1,1 +1,18 @@
-= @project.tasks
+%table.table.table-hover
+  %thead
+    %tr
+      %th Title
+      %th Descriptin
+      %th Status
+      %th Priority
+      %th Actions
+  %tbody
+    - @project.tasks.each do |task|
+      %tr
+        %td= link_to task.title
+        %td= task.description
+        %td= task.task_status.label
+        %td= task.priority.label
+        %td= link_to 'Edit', edit_task_path(task)
+
+= link_to 'New task', new_project_task_path(@project), class: 'btn btn-default'
