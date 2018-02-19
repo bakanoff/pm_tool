@@ -1,0 +1,5 @@
+.form_group
+  = simple_form_for [@comment.task, @comment] do |f|
+    = f.input :content
+    = f.association :user
+    = f.button :submit
