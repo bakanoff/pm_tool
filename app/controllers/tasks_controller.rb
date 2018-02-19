@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+#  before_action :default_status, only: [:create, :update, :edit]
 
   def index
     @tasks = Task.all
@@ -44,4 +45,8 @@ class TasksController < ApplicationController
   def project
     @project ||= Project.find(params[:project_id])
   end
+
+#  def default_status
+#    @task.task_status_id ||= TaskStatus.first[:id]
+#  end
 end
