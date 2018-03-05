@@ -2,3 +2,12 @@
 = @task.description
 
 = link_to 'Edit', edit_project_task_path(@task.project, @task)
+
+%h2 Comments
+%p
+  - @task.comments.each do |comment|
+    %strong= "#{comment.user.first_name} #{comment.user.last_name}"
+    = "at #{comment.created_at}"
+    %p= comment.content
+    %hr
+= render partial: '/comments/form'

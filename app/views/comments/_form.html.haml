@@ -1,5 +1,7 @@
 .form_group
-  = simple_form_for [@comment.task, @comment] do |f|
-    = f.input :content
-    = f.association :user
-    = f.button :submit
+  = simple_form_for :comment, url: task_comments_path(@task) do |f|
+    .form-group
+      = f.input :content, as: :text, label: false
+    = f.input :user_id, as: :hidden, input_html: { value: User.last.id }
+    .form-group
+      = f.button :submit, class: 'btn btn-default'

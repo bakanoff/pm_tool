@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   resources :priorities
   resources :task_statuses
   resources :users
+
+
 end
