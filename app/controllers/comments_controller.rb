@@ -10,7 +10,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-    binding.pry
     @comment = task.comments.create!(comment_params)
     if @comment.save
       redirect_to task_path(task)
