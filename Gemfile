@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'simple_form'
 gem 'haml'
 gem "twitter-bootstrap-rails"
+gem 'jquery-rails', '4.3.1'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.7'
