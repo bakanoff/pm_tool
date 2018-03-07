@@ -9,7 +9,7 @@
   %tbody
     - @project.tasks.each do |task|
       %tr
-        %td= link_to task.title
+        %td= link_to task.title, project_task_path(@project, task)
         %td= task.description
         %td= task.task_status.label
         %td= task.priority.label
